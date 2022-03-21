@@ -33,27 +33,24 @@
             steps {
                 sh &apos;cd /src/terraform &amp;&amp; sed -i s/localhost/localstack/g providers.tf&apos;
                 sh &apos;cd /src/terraform &amp;&amp; terraform init&apos;
+                sh &apos;cd /src/terraform &amp;&amp; terraform plan&apos;
             }
         }
-        stage(&apos;IaC Plan and Apply&apos;) {
+        stage(&apos;IaC Apply&apos;) {
             steps {
                 sh &apos;echo "Apply TF"&apos;
-                sh &apos;cd /src/terraform &amp;&amp; terraform plan&apos;
-                sh &apos;cd /src/terraform &amp;&amp; terraform apply&apos;
+                sh &apos;cd /src/terraform &amp;&amp; terraform apply -auto-approve&apos;
             }
         }
         stage(&apos;Docker Build&apos;) {
             steps {
-                sh &quot;&quot;&quot;
-                    echo &quot;Build step&quot;
-                &quot;&quot;&quot;
+                
+                sh &apos;echo "Building docker"&apos;
+                sh &apos;cd /src/app &amp;&amp; docker run  --network sa-code-test --rm -p 8085:8080 -d $(docker build -q -t jj .) &apos;
+                sh &apos;echo "Docker deployed and endpoint is up"&apos;
             }
         }
-        stage(&apos;Docker Deploy&apos;) {
-            steps {
-                sh &apos;echo "docker run -d --network sa-code-test -p 8085:8080 sa-code-test:latest"&apos;
-            }
-        }
+        
     }
 }</script>
     <sandbox>true</sandbox>

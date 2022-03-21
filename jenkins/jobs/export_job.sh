@@ -4,4 +4,14 @@ echo "\033[0;33m exporting Job: sample-app-build-and-deploy to ${PWD}/exported_c
 
 container_id=$(docker ps | grep "sa-jenkins" | awk '{print $1}')
 
-docker cp ${container_id}:var/jenkins_home/jobs/sample-app-build-and-deploy/config.xml ${PWD}/exported_config.xml
+# docker cp ${container_id}:var/jenkins_home/jobs/sample-app-build-and-deploy/config.xml ${PWD}/exported_config.xml
+
+docker cp ${PWD}/exported_config.xml ${container_id}:var/jenkins_home/jobs/sample-app-build-and-deploy/config.xml 
+
+
+# docker cp ${PWD}/sample-app-build-and-deploy/config.xml ${container_id}:var/jenkins_home/jobs/exported_config.xml
+
+
+# docker cp ${container_id}:var/jenkins_home/jobs/sample-app-build-and-deploy/config.xml ${PWD}/exported_config.xml
+
+# docker cp ${PWD}/sample-app-build-and-deploy/config.xml ${container_id}:var/jenkins_home/jobs/sample-app-build-and-deploy/config.xml 
