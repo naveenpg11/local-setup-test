@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "details":"My super order for localstack store test-1",
+    "orderTotalPrice": "55.66"
+  },
+  {
+    "id": "2",
+    "details":"My super order for localstack store test-2",
+    "orderTotalPrice": "56.78"
+  },
+  {
+    "id": "3",
+    "details":"My super order for localstack store test-3",
+    "orderTotalPrice": "57.89"
+  }
+]

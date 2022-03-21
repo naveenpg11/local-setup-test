@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sa-platform-engineer-code-test
+  description: 'Self contained coding exercise, where candidates will be able to run
+    everything in their local environment without the need to create accounts or systems
+    somewhere relying on purely open source stack. '
+  tags:
+  - superawesome
+  - shell
+  annotations:
+    backstage.io/techdocs-ref: url:https://github.com/SuperAwesomeLTD/sa-platform-engineer-code-test/tree/main
+    circleci.com/project-slug: github/SuperAwesomeLTD/sa-platform-engineer-code-test
+    sonarqube.org/project-key: SuperAwesomeLTD_sa-platform-engineer-code-test
+spec:
+  type: library
+  lifecycle: development
+  owner: team-sa-platform-engineering
+  system: sa-platform-engineering
+  serviceTeam: team-sa-platform-engineering

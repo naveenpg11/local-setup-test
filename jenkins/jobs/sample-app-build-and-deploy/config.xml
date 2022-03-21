@@ -1,0 +1,60 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.42">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.9.2"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.9.2">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>10</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+      <abortPrevious>false</abortPrevious>
+    </org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.DisableResumeJobProperty/>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2633.v6baeedc13805">
+    <script>pipeline {
+    agent { label &apos;built-in&apos; }
+    stages {
+        stage(&apos;IaC Plan&apos;) {
+            steps {
+                sh &apos;cd /src/terraform &amp;&amp; sed -i s/localhost/localstack/g providers.tf&apos;
+                sh &apos;cd /src/terraform &amp;&amp; terraform init&apos;
+            }
+        }
+        stage(&apos;IaC Apply&apos;) {
+            steps {
+                sh &apos;echo "Apply TF"&apos;
+            }
+        }
+        stage(&apos;Docker Build&apos;) {
+            steps {
+                sh &quot;&quot;&quot;
+                    echo &quot;Build step&quot;
+                &quot;&quot;&quot;
+            }
+        }
+        stage(&apos;Docker Deploy&apos;) {
+            steps {
+                sh &apos;echo "docker run -d --network sa-code-test -p 8085:8080 sa-code-test:latest"&apos;
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
