@@ -14,9 +14,9 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
     && apt update && apt install -y docker-ce-cli \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - \
-    && add-apt-repository "deb [arch=arm64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
-    && apt-get update && apt-get install terraform=1.0.10
+RUN curl -fsSL https://releases.hashicorp.com/terraform/1.0.10/terraform_1.0.10_linux_arm64.zip > /tmp/terra.zip \
+    && unzip /tmp/terra.zip \
+    && mv terraform /usr/local/bin
 
 # bootstarp
 RUN jenkins-plugin-cli --plugins blueocean:1.25.1
