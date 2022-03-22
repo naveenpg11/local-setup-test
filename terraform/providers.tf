@@ -18,7 +18,7 @@ provider "aws" {
   skip_requesting_account_id  = true
 
   endpoints {
-    dynamodb = "http://localstack:4566"
+    dynamodb = "http://localhost:4566"
     ## This file will be auto edited when the CI runs it's job
     ## It will modify the above line to http://localstack:4566
   }
