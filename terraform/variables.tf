@@ -1,3 +1,5 @@
+## Each input variable accepted by a module is declared using a variable block
+
 variable "dynamodb_table_name" {
     type = string
     description = "Name of the table to create in DynamoDB"

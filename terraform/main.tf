@@ -1,4 +1,4 @@
-## Main Terraform module code goes here
+## Main Terraform module to create Dynamo DB
 
 resource "aws_dynamodb_table" "dynamodb-table" {
   name           = var.dynamodb_table_name
