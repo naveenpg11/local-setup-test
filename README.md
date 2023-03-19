@@ -1,4 +1,4 @@
-SuperAwesome local code test environment for platform engineers
+SA local code test environment for platform engineers
 ====================================
 
 Self contained coding exercise, where candidates will be able to run everything in their local environment without the need to create accounts or systems somewhere relying on purely open source stack.
